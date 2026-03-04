@@ -15,14 +15,14 @@ export const Navbar = ({ navOpen, setNavOpen }) => {
   }, []);
 
   const navLinkClasses =
-    "relative text-white/90 transition-colors duration-300 hover:text-cyan-400 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-cyan-400 after:transition-all after:duration-300 hover:after:w-full";
+    "relative text-black/70 transition-colors duration-300 hover:text-cyan-400 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-cyan-400 after:transition-all after:duration-300 hover:after:w-full";
 
   return (
     <nav
-      className={`fixed top-0 z-50 w-full backdrop-blur-xl transition-all duration-300
+      className={`fixed top-0 z-50 w-full backdrop-blur-xl transition-all duration-300 bg-white
         ${
           scrolled
-            ? "bg-black/70 border-b border-white/10 shadow-lg"
+            ? "bg-white border-b border-white/10 shadow-lg"
             : "bg-transparent"
         }
       `}
@@ -31,7 +31,7 @@ export const Navbar = ({ navOpen, setNavOpen }) => {
         <div className="flex h-16 items-center justify-between">
           <a
             href="#home"
-            className="font-mono text-xl z-50 font-bold tracking-wide text-white group"
+            className="font-mono text-xl z-50 font-bold tracking-wide text-black group"
           >
             <span className="text-cyan-400 group-hover:text-cyan-300 transition">
               ibaah
@@ -45,7 +45,7 @@ export const Navbar = ({ navOpen, setNavOpen }) => {
             onClick={() => setNavOpen(!navOpen)}
             aria-label="Toggle navigation"
           >
-            <span className="text-2xl">{navOpen ? "✕" : "☰"}</span>
+            <span className="text-2xl text-black">{navOpen ? "✕" : "☰"}</span>
           </button>
 
           <div className="hidden md:flex items-center space-x-10">
@@ -55,9 +55,10 @@ export const Navbar = ({ navOpen, setNavOpen }) => {
             <a href="#about" className={navLinkClasses}>
               About
             </a>
-            <a href="#projects" className={navLinkClasses}>
-              Projects
-            </a>
+           <a href="#projects" className={navLinkClasses} style={{color: '#E84949'}}>
+  <span>⚙</span> Projects
+</a>
+
             <a href="#contact" className={navLinkClasses}>
               Contact
             </a>
