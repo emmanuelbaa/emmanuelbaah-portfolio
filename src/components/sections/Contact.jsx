@@ -1,6 +1,7 @@
 import { AppearOnScroll } from "../AppearOnScroll";
 import emailjs from "emailjs-com";
 import { useState } from "react";
+import { Mail, User, MessageSquare, Send } from "lucide-react";
 
 export const Contact = () => {
   const [formData, setFormData] = useState({
@@ -8,6 +9,7 @@ export const Contact = () => {
     email: "",
     message: "",
   });
+
   const [isSending, setIsSending] = useState(false);
   const [status, setStatus] = useState({ type: "", message: "" });
 
@@ -41,35 +43,48 @@ export const Contact = () => {
     <section
       id="contact"
       className="relative flex min-h-screen items-center justify-center overflow-hidden
-                 bg-gradient-to-r from-[#4f47c8]/20 via-[#dbe5ff]/60 to-[#1dd5d0]/10
-                 px-4 py-24 sm:px-6 lg:px-8"
+      bg-gradient-to-r from-[#4f47c8]/20 via-[#dbe5ff]/60 to-[#1dd5d0]/10
+      px-4 py-24 sm:px-6 lg:px-8"
     >
       <AppearOnScroll>
+        {/* Decorative Background */}
         <div className="absolute inset-0 -z-10 overflow-hidden">
           <div className="absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-400/20 blur-3xl" />
           <div className="absolute left-1/3 top-1/3 h-[320px] w-[320px] rounded-full bg-indigo-400/15 blur-3xl" />
-          <div className="pointer-events-none absolute right-10 top-20 h-28 w-28 rounded-full border-2 border-dashed border-[#1e3a8a]/25" />
+          <div className="absolute right-10 top-20 h-28 w-28 rounded-full border-2 border-dashed border-[#1e3a8a]/25" />
+          <div className="absolute bottom-20 left-10 h-20 w-20 rounded-full border border-cyan-400/30" />
         </div>
 
-        <div className="mx-auto w-full max-w-lg sm:max-w-2xl lg:max-w-3xl">
-          <h2
-            className="mb-6 text-center text-3xl font-bold text-[#1e3a8a] sm:text-4xl lg:text-5xl"
+        <div className="mx-auto w-full max-w-4xl">
+
+          {/* Header */}
+          <div className="text-center mb-14">
+            <h2 className="text-4xl font-bold text-[#1e3a8a] sm:text-5xl">
+              Let's Work Together
+            </h2>
+
+            <div className="mx-auto mt-3 h-1 w-24 rounded bg-gradient-to-r from-cyan-400 to-blue-600" />
+
+            <p className="mx-auto mt-6 max-w-xl text-slate-700">
+              Have a project idea, collaboration, or opportunity?  
+              Send me a message and I'll get back to you soon.
+            </p>
+          </div>
+
+          {/* Contact Card */}
+          <form
+            onSubmit={handleSubmit}
+            className="space-y-6 rounded-2xl border border-white/40 bg-white/50
+            p-8 shadow-2xl backdrop-blur-md transition-all hover:-translate-y-1"
           >
-            Contact Me 
-          </h2>
-          <p className="mx-auto mb-10 max-w-xl text-center text-slate-700">
-           
-          </p>
-
-        <form
-  onSubmit={handleSubmit}
-  className="w-full max-w-4xl mx-auto space-y-6 rounded-2xl border border-white/40 bg-white/40 p-6 shadow-xl backdrop-blur-md transition-all hover:-translate-y-1 sm:space-y-7 sm:p-8 lg:p-10"
->
-
-            <div>
-              <label htmlFor="contact-name" className="mb-2 block text-sm font-medium text-[#1e3a8a]">
+            {/* Name */}
+            <div className="relative">
+              <label className="mb-2 block text-sm font-medium text-[#1e3a8a]">
                 Name
               </label>
+
+              <User className="absolute left-3 top-[42px] h-5 w-5 text-slate-500" />
+
               <input
                 id="contact-name"
                 type="text"
@@ -80,14 +95,21 @@ export const Contact = () => {
                 }
                 placeholder="Your Name"
                 required
-                className="w-full rounded-md border border-[#1e3a8a]/20 bg-white/60 px-4 py-3 text-slate-800 placeholder:text-slate-500 transition focus:outline-none focus:ring-2 focus:ring-cyan-500/60"
+                className="w-full rounded-md border border-[#1e3a8a]/20
+                bg-white/60 pl-10 pr-4 py-3 text-slate-800
+                placeholder:text-slate-500 transition
+                focus:outline-none focus:ring-2 focus:ring-cyan-500/60"
               />
             </div>
 
-            <div>
-              <label htmlFor="contact-email" className="mb-2 block text-sm font-medium text-[#1e3a8a]">
+            {/* Email */}
+            <div className="relative">
+              <label className="mb-2 block text-sm font-medium text-[#1e3a8a]">
                 Email
               </label>
+
+              <Mail className="absolute left-3 top-[42px] h-5 w-5 text-slate-500" />
+
               <input
                 id="contact-email"
                 type="email"
@@ -98,14 +120,21 @@ export const Contact = () => {
                 }
                 placeholder="example@email.com"
                 required
-                className="w-full rounded-md border border-[#1e3a8a]/20 bg-white/60 px-4 py-3 text-slate-800 placeholder:text-slate-500 transition focus:outline-none focus:ring-2 focus:ring-cyan-500/60"
+                className="w-full rounded-md border border-[#1e3a8a]/20
+                bg-white/60 pl-10 pr-4 py-3 text-slate-800
+                placeholder:text-slate-500 transition
+                focus:outline-none focus:ring-2 focus:ring-cyan-500/60"
               />
             </div>
 
-            <div>
-              <label htmlFor="contact-message" className="mb-2 block text-sm font-medium text-[#1e3a8a]">
+            {/* Message */}
+            <div className="relative">
+              <label className="mb-2 block text-sm font-medium text-[#1e3a8a]">
                 Message
               </label>
+
+              <MessageSquare className="absolute left-3 top-[44px] h-5 w-5 text-slate-500" />
+
               <textarea
                 id="contact-message"
                 name="message"
@@ -116,28 +145,42 @@ export const Contact = () => {
                 }
                 placeholder="Tell me about your project..."
                 required
-                className="w-full resize-none rounded-md border border-[#1e3a8a]/20 bg-white/60 px-4 py-3 text-slate-800 placeholder:text-slate-500 transition focus:outline-none focus:ring-2 focus:ring-cyan-500/60"
+                className="w-full resize-none rounded-md border border-[#1e3a8a]/20
+                bg-white/60 pl-10 pr-4 py-3 text-slate-800
+                placeholder:text-slate-500 transition
+                focus:outline-none focus:ring-2 focus:ring-cyan-500/60"
               />
             </div>
 
+            {/* Submit */}
             <button
               type="submit"
               disabled={isSending}
-              className="w-full rounded-md bg-gradient-to-r from-cyan-500 to-blue-600 py-3 text-base font-medium text-white transition hover:-translate-y-0.5 hover:shadow-[0_0_25px_rgba(0,255,255,0.4)] disabled:cursor-not-allowed disabled:opacity-70 sm:py-3.5 sm:text-lg"
+              className="flex w-full items-center justify-center gap-2
+              rounded-md bg-gradient-to-r from-cyan-500 to-blue-600
+              py-3 text-lg font-medium text-white
+              transition hover:-translate-y-0.5
+              hover:shadow-[0_0_30px_rgba(0,255,255,0.45)]
+              disabled:cursor-not-allowed disabled:opacity-70"
             >
+              <Send size={18} />
               {isSending ? "Sending..." : "Send Message"}
             </button>
 
+            {/* Status Message */}
             {status.message ? (
               <p
                 className={`text-center text-sm ${
-                  status.type === "success" ? "text-emerald-700" : "text-red-600"
+                  status.type === "success"
+                    ? "text-emerald-700"
+                    : "text-red-600"
                 }`}
               >
                 {status.message}
               </p>
             ) : null}
           </form>
+
         </div>
       </AppearOnScroll>
     </section>

@@ -9,7 +9,7 @@ import { About } from './components/sections/About'
 import { Project } from './components/sections/Projects'
 import { Contact } from './components/sections/Contact'
 import { MobileView } from './components/MobileView'
-import {Footer} from './components/sections/Footer'
+import { Footer } from './components/sections/Footer'
 function App() {
   const [loading, setLoading] = useState(false);
   const [navOpen, setNavOpen] = useState(false);

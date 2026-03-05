@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { Download } from "lucide-react";
+import resumePdf from "../assets/resume.pdf";
 
 export const Navbar = ({ navOpen, setNavOpen }) => {
   const [scrolled, setScrolled] = useState(false);
@@ -19,16 +21,14 @@ export const Navbar = ({ navOpen, setNavOpen }) => {
 
   return (
     <nav
-      className={`fixed top-0 z-50 w-full backdrop-blur-xl transition-all duration-300 bg-white
-        ${
-          scrolled
-            ? "bg-white border-b border-white/10 shadow-lg"
-            : "bg-transparent"
-        }
+      className={`fixed top-0 z-50 w-full backdrop-blur-xl transition-all duration-300
+      ${scrolled ? "bg-white border-b border-white/10 shadow-lg" : "bg-transparent"}
       `}
     >
       <div className="mx-auto max-w-6xl px-6">
         <div className="flex h-16 items-center justify-between">
+
+          {/* Logo */}
           <a
             href="#home"
             className="font-mono text-xl z-50 font-bold tracking-wide text-black group"
@@ -39,6 +39,7 @@ export const Navbar = ({ navOpen, setNavOpen }) => {
             2745
           </a>
 
+          {/* Mobile button */}
           <button
             className="relative z-50 flex h-10 w-10 items-center justify-center rounded-md text-white md:hidden
                        transition hover:bg-white/10"
@@ -48,27 +49,51 @@ export const Navbar = ({ navOpen, setNavOpen }) => {
             <span className="text-2xl text-black">{navOpen ? "✕" : "☰"}</span>
           </button>
 
+          {/* Desktop Nav */}
           <div className="hidden md:flex items-center space-x-10">
+
             <a href="#home" className={navLinkClasses}>
               Home
             </a>
+
             <a href="#about" className={navLinkClasses}>
               About
             </a>
-           <a href="#projects" className={navLinkClasses} style={{color: '#E84949'}}>
-  <span>⚙</span> Projects
-</a>
+
+            <a
+              href="#projects"
+              className={navLinkClasses}
+              style={{ color: "#E84949" }}
+            >
+              <span>⚙</span> Projects
+            </a>
 
             <a href="#contact" className={navLinkClasses}>
               Contact
             </a>
+
+            {/* Resume Button */}
+            <a
+              href={resumePdf}
+              download
+              className="flex items-center gap-2 rounded-md bg-gradient-to-r
+              from-cyan-500 to-blue-600 px-5 py-2 text-white font-medium
+              transition-all duration-300
+              hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(0,255,255,0.55)]"
+            >
+              <Download size={16} />
+              Resume
+            </a>
+
           </div>
         </div>
       </div>
 
+      {/* Mobile Menu */}
       {navOpen && (
-        <div className="md:hidden fixed inset-0 z-10 bg-black/1 backdrop-blur-xl">
+        <div className="md:hidden fixed inset-0 z-10 bg-black/10 backdrop-blur-xl">
           <div className="flex h-full flex-col items-center justify-center space-y-8 text-lg mt-90">
+
             {["home", "about", "projects", "contact"].map((item) => (
               <a
                 key={item}
@@ -79,6 +104,20 @@ export const Navbar = ({ navOpen, setNavOpen }) => {
                 {item.charAt(0).toUpperCase() + item.slice(1)}
               </a>
             ))}
+
+            {/* Mobile Resume Button */}
+            <a
+              href={resumePdf}
+              download
+              className="mt-6 flex items-center gap-2 rounded-md
+              bg-gradient-to-r from-cyan-500 to-blue-600
+              px-6 py-3 text-white font-medium
+              hover:shadow-[0_0_20px_rgba(0,255,255,0.55)]"
+            >
+              <Download size={18} />
+              Download Resume
+            </a>
+
           </div>
         </div>
       )}
