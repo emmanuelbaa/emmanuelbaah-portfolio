@@ -28,10 +28,10 @@ export const Contact = () => {
         setStatus({ type: "success", message: "Message sent successfully." });
         setFormData({ name: "", email: "", message: "" });
       })
-      .catch(() => {
+      .catch((error) => {
         setStatus({
           type: "error",
-          message: "Failed to send message. Please try again later.",
+          message: error?.text || "Failed to send message. Please try again later.",
         });
       })
       .finally(() => {
@@ -143,7 +143,7 @@ export const Contact = () => {
                 onChange={(e) =>
                   setFormData({ ...formData, message: e.target.value })
                 }
-                placeholder="Tell me about your project..."
+                placeholder="your message..."
                 required
                 className="w-full resize-none rounded-md border border-[#1e3a8a]/20
                 bg-white/60 pl-10 pr-4 py-3 text-slate-800
