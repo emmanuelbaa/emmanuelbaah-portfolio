@@ -1,4 +1,5 @@
 import { AppearOnScroll } from "../AppearOnScroll";
+import { ArrowUpRight } from "lucide-react";
 
 const projects = [
   {
@@ -10,28 +11,12 @@ const projects = [
     accent: "from-cyan-400 to-blue-500",
   },
   {
-    title: "Python Projects",
-    description:
-      "Developed scalable backend and data-driven applications using Django, Flask, and NumPy for web and analytical solutions.",
-    stack: ["Python", "Django", "Flask", "NumPy"],
-    link: "#",
-    accent: "from-green-400 to-emerald-500",
-  },
-  {
     title: "Unity Game Projects",
     description:
       "Created interactive 2D and 3D games in Unity using C#, focusing on gameplay mechanics, physics, animations, and UI systems.",
     stack: ["Unity", "C#", "Game Development"],
     link: "#",
-    accent: "from-purple-400 to-fuchsia-500",
-  },
-  {
-    title: "PostgreSQL Database Projects",
-    description:
-      "Designed and optimized relational databases using PostgreSQL, writing efficient queries and managing large datasets.",
-    stack: ["PostgreSQL", "SQL", "Database Design"],
-    link: "#",
-    accent: "from-orange-400 to-amber-500",
+    accent: "from-indigo-500 to-blue-500",
   },
   {
     title: "3D Modeling & Design",
@@ -39,7 +24,7 @@ const projects = [
       "Produced detailed 3D assets and environments using industry-standard tools for games, films, and real-time experiences.",
     stack: ["Blender", "Maya", "Substance Painter"],
     link: "https://sites.google.com/view/emmanuelbaah1/works",
-    accent: "from-pink-400 to-rose-500",
+    accent: "from-cyan-500 to-teal-500",
   },
 ];
 
@@ -47,62 +32,92 @@ export const Project = () => {
   return (
     <section
       id="projects"
-      className="min-h-screen py-24 bg-gradient-to-b from-black via-slate-950 to-black"
+      className="relative min-h-screen overflow-hidden bg-[#1e3a8a] py-24"
     >
+      {/* Background Effects */}
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute left-1/2 top-1/2 h-[450px] w-[450px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-400/20 blur-3xl" />
+        <div className="absolute left-1/3 top-1/3 h-[320px] w-[320px] rounded-full bg-indigo-400/15 blur-3xl" />
+        <div className="absolute bottom-10 right-10 h-24 w-24 rounded-full border-2 border-dashed border-cyan-300/30" />
+      </div>
+
       <AppearOnScroll>
         <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl
-                       font-bold mb-10 sm:mb-14 text-center
-                       bg-gradient-to-r from-cyan-400 to-fuchsia-500
-                       bg-clip-text text-transparent">
-            Featured Projects
-          </h2>
-          <p className="text-center text-gray-400 mb-16 max-w-2xl mx-auto">
-            A curated selection of projects showcasing my skills across
-            frontend development, backend systems, game development, and 3D
-            design.
-          </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Header */}
+          <div className="text-center mb-20">
+            <h2 className="text-4xl font-bold text-white sm:text-5xl">
+              Featured Projects
+            </h2>
+
+            <div className="mx-auto mt-3 h-1 w-24 rounded bg-gradient-to-r from-cyan-400 to-blue-500" />
+
+            <p className="mx-auto mt-6 max-w-2xl text-slate-300">
+              A selection of projects highlighting my work in web development,
+              game development, and 3D design.
+            </p>
+          </div>
+
+          {/* Projects Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             {projects.map((project) => (
               <a
                 key={project.title}
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(0,255,255,0.25)]"
+                className="group relative overflow-hidden rounded-2xl border border-white/20
+                bg-white/10 p-7 shadow-lg backdrop-blur-md
+                transition-all duration-300 hover:-translate-y-3
+                hover:shadow-[0_25px_50px_rgba(0,0,0,0.35)]"
               >
-       
+                {/* Accent line */}
                 <div
-                  className={`absolute inset-x-0 top-0 h-1 rounded-t-2xl bg-gradient-to-r ${project.accent}`}
+                  className={`absolute inset-x-0 top-0 h-1 bg-gradient-to-r ${project.accent}`}
                 />
 
-                <h3 className="text-xl font-semibold text-cyan-400 mb-3 group-hover:text-cyan-300 transition-colors">
-                  {project.title}
-                </h3>
+                {/* Glow on hover */}
+                <div
+                  className={`absolute inset-0 opacity-0 group-hover:opacity-20 transition bg-gradient-to-br ${project.accent}`}
+                />
 
-                <p className="text-gray-300 text-sm leading-relaxed mb-6">
-                  {project.description}
-                </p>
+                {/* Content */}
+                <div className="relative z-10">
 
-                <div>
-                  <h4 className="text-xs uppercase tracking-wider text-cyan-300 mb-3">
-                    Tech Stack
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {project.stack.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-3 py-1 text-xs rounded-full bg-cyan-500/15 text-cyan-300 border border-cyan-400/20"
-                      >
-                        {tech}
-                      </span>
-                    ))}
+                  <h3 className="mb-3 text-xl font-semibold text-white group-hover:text-cyan-300">
+                    {project.title}
+                  </h3>
+
+                  <p className="mb-6 text-sm leading-relaxed text-slate-300">
+                    {project.description}
+                  </p>
+
+                  {/* Stack */}
+                  <div className="mb-6">
+                    <h4 className="mb-3 text-xs uppercase tracking-wider text-slate-400">
+                      Tech Stack
+                    </h4>
+
+                    <div className="flex flex-wrap gap-2">
+                      {project.stack.map((tech) => (
+                        <span
+                          key={tech}
+                          className="rounded-full border border-white/20
+                          bg-white/10 px-3 py-1 text-xs text-slate-200
+                          backdrop-blur-sm"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* View project */}
+                  <div className="flex items-center text-sm font-medium text-cyan-300 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                    View Project
+                    <ArrowUpRight className="ml-2 h-4 w-4" />
                   </div>
                 </div>
-
-                {/* Hover overlay */}
-                <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity bg-gradient-to-br from-cyan-400/5 to-transparent" />
               </a>
             ))}
           </div>

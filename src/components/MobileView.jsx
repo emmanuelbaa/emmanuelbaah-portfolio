@@ -23,41 +23,63 @@ export const MobileView = ({ navOpen, setNavOpen }) => {
   return (
     <div
       className={`fixed inset-0 z-40 md:hidden
-      bg-[rgba(5,63,74,0.9)] backdrop-blur-xl
       flex flex-col items-center justify-center
       transition-all duration-300 ease-in-out
+      bg-gradient-to-br from-[#042a32] via-[#053f4a] to-[#02171c]
+      backdrop-blur-xl
       ${navOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
     >
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-1/3 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-cyan-500/20 blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/3 h-56 w-56 rounded-full bg-fuchsia-500/20 blur-3xl" />
+
+      {/* Background Visual Effects */}
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+
+        {/* glowing orbs */}
+        <div className="absolute top-1/3 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-cyan-500/25 blur-[120px]" />
+        <div className="absolute bottom-20 right-10 h-64 w-64 rounded-full bg-fuchsia-500/20 blur-[110px]" />
+        <div className="absolute top-10 left-10 h-56 w-56 rounded-full bg-blue-400/20 blur-[100px]" />
+
+        {/* subtle tech grid */}
+        <div
+          className="absolute inset-0 opacity-[0.06]"
+          style={{
+            backgroundImage:
+              "linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px)",
+            backgroundSize: "70px 70px",
+          }}
+        />
       </div>
 
-
+      {/* Close Button */}
       <button
         onClick={() => setNavOpen(false)}
         aria-label="Close navigation"
         className="absolute top-6 right-6 text-white text-3xl font-bold
-                   rounded-md px-3 py-1 transition
-                   hover:bg-white/10 focus:outline-none"
+        h-11 w-11 flex items-center justify-center
+        rounded-lg border border-white/20
+        bg-white/10 backdrop-blur-md
+        transition-all duration-200
+        hover:bg-white/20 hover:scale-110"
       >
         &times;
       </button>
 
-      {links.map((link, index) => (
-        <a
-          key={link.label}
-          href={link.href}
-          onClick={() => setNavOpen(false)}
-          className={`text-2xl font-semibold text-white my-4
-          transform transition-all duration-300
-          hover:scale-110 hover:text-cyan-400
-          ${!navOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"}`}
-          style={{ transitionDelay: `${index * 70}ms` }}
-        >
-          {link.label}
-        </a>
-      ))}
+      {/* Navigation Links */}
+      <div className="flex flex-col items-center space-y-6">
+        {links.map((link, index) => (
+          <a
+            key={link.label}
+            href={link.href}
+            onClick={() => setNavOpen(false)}
+            className={`text-3xl font-semibold tracking-wide text-white
+            transition-all duration-300 transform
+            hover:text-cyan-400 hover:scale-110
+            ${!navOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"}`}
+            style={{ transitionDelay: `${index * 70}ms` }}
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
     </div>
   );
 };
