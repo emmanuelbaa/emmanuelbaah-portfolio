@@ -76,11 +76,7 @@ body {
   }
 }
 
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-12px); }
-  100% { transform: translateY(0px); }
-}
+
 
 @keyframes spin-slow {
   from { transform: rotate(0deg); }
@@ -91,9 +87,6 @@ body {
   animation: spin-slow 2s linear infinite;
 }
 
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
 
 .appear {
   opacity: 0;
@@ -103,4 +96,13 @@ body {
 .appear.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }

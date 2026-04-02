@@ -1,127 +1,104 @@
 import { AppearOnScroll } from "../AppearOnScroll";
 import baahImg from "../../assets/baah.jpg";
-import { Box } from "lucide-react";
+import { Box, ArrowRight, Mail } from "lucide-react";
 
 export const Home = () => {
   return (
     <section
       id="home"
       className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 py-20
-      bg-gradient-to-br from-[#eef2ff] via-[#dbe5ff] to-[#c7f9ff]"
+      bg-gradient-to-br from-slate-950 via-slate-950/80 to-[#020617]"
     >
       {/* Background Effects */}
-      <div className="absolute inset-0 -z-10 overflow-hidden">
-        
-        {/* gradient glows */}
-        <div className="absolute top-1/2 left-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-400/20 blur-[120px]" />
-        <div className="absolute top-20 left-20 h-[320px] w-[320px] rounded-full bg-indigo-400/20 blur-[100px]" />
-        <div className="absolute bottom-20 right-20 h-[350px] w-[350px] rounded-full bg-blue-300/20 blur-[100px]" />
+      <div className="absolute inset-0 -z-10">
+        {/* Animated Gradient Glows */}
+        <div className="absolute top-1/4 left-1/4 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-cyan-500/30 blur-[140px] animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 h-[500px] w-[500px] translate-x-1/2 rounded-full bg-indigo-500/30 blur-[140px] animate-pulse" />
 
-        {/* subtle tech grid */}
+        {/* Tech Grid with Fade Mask */}
         <div
-          className="absolute inset-0 opacity-[0.07]"
+          className="absolute inset-0 opacity-[0.05]"
           style={{
             backgroundImage:
               "linear-gradient(#1e3a8a 1px, transparent 1px), linear-gradient(90deg, #1e3a8a 1px, transparent 1px)",
-            backgroundSize: "80px 80px",
+            backgroundSize: "60px 60px",
+            maskImage: "radial-gradient(ellipse at center, black, transparent 80%)",
           }}
         />
       </div>
 
       <AppearOnScroll>
         <div className="z-10 mx-auto w-full max-w-6xl py-16">
-          <div className="grid grid-cols-1 items-center gap-14 md:grid-cols-2">
+          <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
             
             {/* TEXT SIDE */}
             <div className="text-center md:text-left">
-              <h1 className="mb-6 text-4xl font-bold leading-tight text-[#1e3a8a] md:text-5xl">
-                Creative Technologist & Software Developer
-              </h1>
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-indigo-400/50 bg-indigo-500/10 px-4 py-1.5 text-sm font-semibold text-cyan-200 backdrop-blur-sm">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+                </span>
+                Available for New Projects
+              </div>
 
-              <p className="mx-auto mb-8 max-w-xl text-lg text-slate-700 md:mx-0">
-                Hi, I'm Emmanuel Baah, a developer who has a passion to build
-                impactful software solutions using innovative ideas to solve
-                real-world problems and create meaningful digital experiences.
+              <h1 className="mb-6 text-5xl font-extrabold tracking-tight text-white md:text-7xl">
+                Software <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Developer</span>
+              </h1>
+              {/* <h2>& Software Developer</h2> */}
+
+              <p className="mx-auto mb-10 max-w-xl text-lg leading-relaxed text-slate-300 md:mx-0">
+                Hi, I'm <span className="font-semibold text-white">Emmanuel Baah</span>.
+                I bridge the gap between complex engineering and intuitive design to create
+                impactful digital experiences.
               </p>
 
-              <div className="flex flex-col items-center gap-4 sm:flex-row md:items-start">
+              <div className="flex flex-col items-center gap-5 sm:flex-row md:items-start">
                 <a
                   href="#projects"
-                  className="group relative overflow-hidden rounded-md bg-gradient-to-r from-cyan-500 to-blue-600 px-8 py-3 font-medium text-white transition-all duration-300
-                  hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(0,255,255,0.6)]"
+                  className="group flex items-center gap-2 rounded-full bg-cyan-500 px-8 py-4 font-bold text-slate-900 transition-all hover:bg-cyan-400 hover:shadow-[0_20px_45px_-20px_rgba(16,185,129,0.7)] hover:-translate-y-1 active:scale-95"
                 >
-                  <span className="relative z-10">View Projects</span>
-                  <span className="absolute inset-0 -translate-x-full bg-white/10 transition-transform duration-300 group-hover:translate-x-0" />
+                  View My Work
+                  <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
                 </a>
 
                 <a
                   href="#contact"
-                  className="rounded-md border border-[#1e3a8a]/40 bg-white/40 px-8 py-3 font-medium text-[#1e3a8a]
-                  backdrop-blur-md transition-all duration-300 hover:-translate-y-1
-                  hover:bg-cyan-500/10 hover:shadow-lg"
+                  className="group flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-8 py-4 font-bold text-slate-200 backdrop-blur-md transition-all hover:border-cyan-400 hover:text-white hover:-translate-y-1"
                 >
-                  Contact Me
+                  <Mail size={18} />
+                  Contact
                 </a>
               </div>
             </div>
 
             {/* IMAGE SIDE */}
-            <div className="relative mx-auto mt-6 w-fit md:mt-0 md:ml-auto">
-
-              {/* cube */}
-              <span className="absolute -top-8 -right-4 z-20 text-[#1e3a8a]">
-                <Box size={28} strokeWidth={2} />
-              </span>
-
-              {/* zigzag */}
-              <div className="absolute -left-8 -top-2 z-20">
-                <svg
-                  viewBox="0 0 24 80"
-                  fill="none"
-                  className="h-20 w-7 text-[#1e3a8a] sm:h-24 sm:w-8"
-                >
-                  <polyline
-                    points="12,2 4,14 20,26 4,38 20,50 4,62 12,74"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+            <div className="relative mx-auto w-fit lg:ml-auto animate-float">
+              
+              {/* Decorative Floating Elements (Enhanced) */}
+              <div className="absolute -right-8 -top-8 z-20 text-indigo-500 animate-bounce delay-700">
+                <Box size={40} strokeWidth={1.5} />
               </div>
 
-              {/* red cross */}
-              <div className="absolute left-24 -top-8 z-20 h-6 w-6">
-                <span className="absolute left-1/2 top-0 h-6 w-[3px] -translate-x-1/2 bg-red-500" />
-                <span className="absolute left-0 top-1/2 h-[3px] w-6 -translate-y-1/2 bg-red-500" />
+              <div className="absolute -left-12 top-1/4 z-20 hidden md:block opacity-40">
+                 <div className="h-24 w-24 rounded-full border-[12px] border-cyan-400/20" />
               </div>
 
-              {/* circle */}
-              <div className="absolute -bottom-7 -left-5 z-20 h-6 w-6 rounded-full border-2 border-[#1e3a8a]" />
-
-              {/* dots */}
-              <div className="absolute -right-4 -bottom-4 grid grid-cols-3 gap-x-6 gap-y-4 z-20">
-                <span className="h-3 w-3 rounded-full bg-red-500" />
-                <span className="h-2 w-2 rounded-full bg-red-500" />
-                <span className="h-2 w-2 rounded-full bg-red-500" />
-                <span className="h-2 w-2 rounded-full bg-red-500" />
-                <span className="h-2 w-2 rounded-full bg-red-500" />
-                <span className="h-2 w-2 rounded-full bg-red-500" />
-                <span className="h-2 w-2 rounded-full bg-red-500" />
-                <span className="h-2 w-2 rounded-full bg-red-500" />
-                <span className="h-3 w-3 rounded-full bg-red-500" />
-              </div>
-
-              {/* image card */}
-              <div
-                className="overflow-hidden rounded-2xl border border-white/40 bg-white/50 p-3
-                shadow-[0_20px_60px_rgba(0,0,0,0.15)] backdrop-blur-xl"
-              >
+              {/* Main Image Container */}
+              <div className="relative z-10 overflow-hidden rounded-3xl border-8 border-slate-800 bg-slate-900/70 shadow-[0_40px_80px_-30px_rgba(15,23,42,0.8)] transition-transform duration-500 hover:scale-[1.02]">
                 <img
                   src={baahImg}
                   alt="Emmanuel Baah"
-                  className="h-auto w-64 rounded-xl object-cover sm:w-72 md:w-80"
+                  className="h-auto w-72 grayscale-[20%] transition-all duration-500 hover:grayscale-0 sm:w-80 md:w-96"
                 />
+                {/* Overlay Gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 to-transparent" />
+              </div>
+
+              {/* Red Dot Grid (Refined) */}
+              <div className="absolute -right-6 -bottom-6 z-0 grid grid-cols-3 gap-3 opacity-50">
+                {[...Array(9)].map((_, i) => (
+                  <div key={i} className="h-2 w-2 rounded-full bg-red-400" />
+                ))}
               </div>
             </div>
 

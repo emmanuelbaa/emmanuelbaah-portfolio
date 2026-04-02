@@ -1,15 +1,10 @@
 import { AppearOnScroll } from "../AppearOnScroll";
 import emailjs from "emailjs-com";
 import { useState } from "react";
-import { Mail, User, MessageSquare, Send } from "lucide-react";
+import { Mail, User, MessageSquare, Send, Loader2, MapPin, Globe } from "lucide-react";
 
 export const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [isSending, setIsSending] = useState(false);
   const [status, setStatus] = useState({ type: "", message: "" });
 
@@ -25,162 +20,156 @@ export const Contact = () => {
     emailjs
       .sendForm(SERVICE_ID, TEMPLATE_ID, e.target, PUBLIC_KEY)
       .then(() => {
-        setStatus({ type: "success", message: "Message sent successfully." });
+        setStatus({ type: "success", message: "Message sent! I'll be in touch soon." });
         setFormData({ name: "", email: "", message: "" });
       })
       .catch((error) => {
         setStatus({
           type: "error",
-          message: error?.text || "Failed to send message. Please try again later.",
+          message: error?.text || "Something went wrong. Please try again.",
         });
       })
-      .finally(() => {
-        setIsSending(false);
-      });
+      .finally(() => setIsSending(false));
   };
 
   return (
     <section
       id="contact"
-      className="relative flex min-h-screen items-center justify-center overflow-hidden
-      bg-gradient-to-r from-[#4f47c8]/20 via-[#dbe5ff]/60 to-[#1dd5d0]/10
-      px-4 py-24 sm:px-6 lg:px-8"
+      className="relative min-h-screen flex items-center justify-center bg-slate-950/90 py-24 px-6 overflow-hidden text-slate-100"
     >
+      
+      {/* Background Decor */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-0 right-0 w-[550px] h-[550px] bg-cyan-500/20 rounded-full blur-[140px] -mr-56 -mt-56" />
+        <div className="absolute bottom-0 left-0 w-[550px] h-[550px] bg-indigo-500/20 rounded-full blur-[140px] -ml-56 -mb-56" />
+        <div className="absolute inset-0 opacity-20" style={{
+          backgroundImage: "linear-gradient(#0f172a 1px, transparent 1px), linear-gradient(90deg, #0f172a 1px, transparent 1px)",
+          backgroundSize: "120px 120px"
+        }} />
+      </div>
+
       <AppearOnScroll>
-        {/* Decorative Background */}
-        <div className="absolute inset-0 -z-10 overflow-hidden">
-          <div className="absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-400/20 blur-3xl" />
-          <div className="absolute left-1/3 top-1/3 h-[320px] w-[320px] rounded-full bg-indigo-400/15 blur-3xl" />
-          <div className="absolute right-10 top-20 h-28 w-28 rounded-full border-2 border-dashed border-[#1e3a8a]/25" />
-          <div className="absolute bottom-20 left-10 h-20 w-20 rounded-full border border-cyan-400/30" />
-        </div>
-
-        <div className="mx-auto w-full max-w-4xl">
-
-          {/* Header */}
-          <div className="text-center mb-14">
-            <h2 className="text-4xl font-bold text-[#1e3a8a] sm:text-5xl">
-              Let's Work Together
-            </h2>
-
-            <div className="mx-auto mt-3 h-1 w-24 rounded bg-gradient-to-r from-cyan-400 to-blue-600" />
-
-            <p className="mx-auto mt-6 max-w-xl text-slate-700">
-              Have a project idea, collaboration, or opportunity?  
-              Send me a message and I'll get back to you soon.
-            </p>
-          </div>
-
-          {/* Contact Card */}
-          <form
-            onSubmit={handleSubmit}
-            className="space-y-6 rounded-2xl border border-white/40 bg-white/50
-            p-8 shadow-2xl backdrop-blur-md transition-all hover:-translate-y-1"
-          >
-            {/* Name */}
-            <div className="relative">
-              <label className="mb-2 block text-sm font-medium text-[#1e3a8a]">
-                Name
-              </label>
-
-              <User className="absolute left-3 top-[42px] h-5 w-5 text-slate-500" />
-
-              <input
-                id="contact-name"
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={(e) =>
-                  setFormData({ ...formData, name: e.target.value })
-                }
-                placeholder="Your Name"
-                required
-                className="w-full rounded-md border border-[#1e3a8a]/20
-                bg-white/60 pl-10 pr-4 py-3 text-slate-800
-                placeholder:text-slate-500 transition
-                focus:outline-none focus:ring-2 focus:ring-cyan-500/60"
-              />
-            </div>
-
-            {/* Email */}
-            <div className="relative">
-              <label className="mb-2 block text-sm font-medium text-[#1e3a8a]">
-                Email
-              </label>
-
-              <Mail className="absolute left-3 top-[42px] h-5 w-5 text-slate-500" />
-
-              <input
-                id="contact-email"
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value })
-                }
-                placeholder="example@email.com"
-                required
-                className="w-full rounded-md border border-[#1e3a8a]/20
-                bg-white/60 pl-10 pr-4 py-3 text-slate-800
-                placeholder:text-slate-500 transition
-                focus:outline-none focus:ring-2 focus:ring-cyan-500/60"
-              />
-            </div>
-
-            {/* Message */}
-            <div className="relative">
-              <label className="mb-2 block text-sm font-medium text-[#1e3a8a]">
-                Message
-              </label>
-
-              <MessageSquare className="absolute left-3 top-[44px] h-5 w-5 text-slate-500" />
-
-              <textarea
-                id="contact-message"
-                name="message"
-                rows={5}
-                value={formData.message}
-                onChange={(e) =>
-                  setFormData({ ...formData, message: e.target.value })
-                }
-                placeholder="your message..."
-                required
-                className="w-full resize-none rounded-md border border-[#1e3a8a]/20
-                bg-white/60 pl-10 pr-4 py-3 text-slate-800
-                placeholder:text-slate-500 transition
-                focus:outline-none focus:ring-2 focus:ring-cyan-500/60"
-              />
-            </div>
-
-            {/* Submit */}
-            <button
-              type="submit"
-              disabled={isSending}
-              className="flex w-full items-center justify-center gap-2
-              rounded-md bg-gradient-to-r from-cyan-500 to-blue-600
-              py-3 text-lg font-medium text-white
-              transition hover:-translate-y-0.5
-              hover:shadow-[0_0_30px_rgba(0,255,255,0.45)]
-              disabled:cursor-not-allowed disabled:opacity-70"
-            >
-              <Send size={18} />
-              {isSending ? "Sending..." : "Send Message"}
-            </button>
-
-            {/* Status Message */}
-            {status.message ? (
-              <p
-                className={`text-center text-sm ${
-                  status.type === "success"
-                    ? "text-emerald-700"
-                    : "text-red-600"
-                }`}
-              >
-                {status.message}
+        <div className="mx-auto max-w-6xl w-full">
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+            
+            {/* Left Side: Info */}
+            <div className="space-y-8">
+            <div>
+              <h2 className="text-5xl font-black text-white md:text-7xl">
+                Get in <span className="text-cyan-400">Touch.</span>
+              </h2>
+              <p className="mt-6 text-lg text-slate-300 leading-relaxed max-w-md">
+                I'm currently looking for new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you!
               </p>
-            ) : null}
-          </form>
+            </div>
 
+              <div className="space-y-6">
+                {[
+                  { icon: <Mail className="text-cyan-500" />, label: "Email", value: "your-email@example.com" },
+                  { icon: <MapPin className="text-indigo-500" />, label: "Location", value: "Blacksburg, VA" },
+                  { icon: <Globe className="text-emerald-500" />, label: "Availability", value: "Open for worldwide remote work" },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-4 p-4 rounded-2xl border border-slate-800 bg-slate-900/60 shadow-[0_20px_60px_-40px_rgba(15,23,42,0.8)] transition-transform hover:scale-105">
+                    <div className="p-3 rounded-xl bg-slate-800">{item.icon}</div>
+                    <div>
+                      <p className="text-xs font-bold uppercase tracking-wider text-slate-500">{item.label}</p>
+                      <p className="font-semibold text-white">{item.value}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right Side: Form */}
+            <div className="relative">
+              <form
+                onSubmit={handleSubmit}
+                className="relative z-10 space-y-5 rounded-3xl border border-slate-800 bg-slate-900/60 p-8 shadow-[0_25px_70px_-30px_rgba(2,6,23,0.8)] backdrop-blur-3xl md:p-10"
+              >
+                <div className="space-y-4">
+                  {/* Name Input */}
+                  <div className="group relative">
+                    <label className="text-xs font-bold text-slate-500 uppercase tracking-widest ml-1">Name</label>
+                    <div className="relative mt-2">
+                      <User className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-cyan-500 transition-colors" size={18} />
+                      <input
+                        type="text"
+                        name="name"
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        placeholder="John Doe"
+                        required
+                        className="w-full rounded-2xl border border-slate-700 bg-slate-900/70 py-4 pl-12 pr-4 text-slate-100 transition-all focus:border-cyan-500 focus:outline-none focus:ring-4 focus:ring-cyan-500/20"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Email Input */}
+                  <div className="group relative">
+                    <label className="text-xs font-bold text-slate-500 uppercase tracking-widest ml-1">Email Address</label>
+                    <div className="relative mt-2">
+                      <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-indigo-500 transition-colors" size={18} />
+                      <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        placeholder="john@example.com"
+                        required
+                        className="w-full rounded-2xl border border-slate-700 bg-slate-900/70 py-4 pl-12 pr-4 text-slate-100 transition-all focus:border-indigo-400 focus:outline-none focus:ring-4 focus:ring-indigo-400/20"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Message Input */}
+                  <div className="group relative">
+                    <label className="text-xs font-bold text-slate-500 uppercase tracking-widest ml-1">Message</label>
+                    <div className="relative mt-2">
+                      <MessageSquare className="absolute left-4 top-5 text-slate-400 group-focus-within:text-emerald-500 transition-colors" size={18} />
+                      <textarea
+                        name="message"
+                        rows={4}
+                        value={formData.message}
+                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                        placeholder="Tell me about your project..."
+                        required
+                        className="w-full resize-none rounded-2xl border border-slate-700 bg-slate-900/70 py-4 pl-12 pr-4 text-slate-100 transition-all focus:border-emerald-400 focus:outline-none focus:ring-4 focus:ring-emerald-400/20"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isSending}
+                  className="group relative flex w-full items-center justify-center gap-3 overflow-hidden rounded-2xl bg-cyan-500 py-4 font-bold text-slate-950 transition-all hover:bg-cyan-400 active:scale-[0.98] disabled:opacity-70"
+                >
+                  {isSending ? (
+                    <Loader2 className="animate-spin" size={20} />
+                  ) : (
+                    <>
+                      <span>Send Message</span>
+                      <Send size={18} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                    </>
+                  )}
+                </button>
+
+                {status.message && (
+                  <div
+                    className={`rounded-xl p-4 text-center text-sm font-medium ${
+                      status.type === "success"
+                        ? "bg-emerald-900/80 text-emerald-200"
+                        : "bg-red-900/80 text-red-200"
+                    }`}
+                  >
+                    {status.message}
+                  </div>
+                )}
+              </form>
+            </div>
+
+          </div>
         </div>
       </AppearOnScroll>
     </section>
